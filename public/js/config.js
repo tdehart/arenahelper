@@ -16,6 +16,18 @@ angular.module('arenahelper').config(['$routeProvider',
         when('/articles/:articleId', {
             templateUrl: 'views/articles/view.html'
         }).
+        when('/cards', {
+            templateUrl: 'views/cards/list.html'
+        }).
+        when('/cards/create', {
+            templateUrl: 'views/cards/create.html'
+        }).
+        when('/cards/:cardId/edit', {
+            templateUrl: 'views/cards/edit.html'
+        }).
+        when('/cards/:cardId', {
+            templateUrl: 'views/cards/view.html'
+        }).
         when('/', {
             templateUrl: 'views/index.html'
         }).

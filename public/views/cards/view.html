@@ -1,0 +1,13 @@
+<section data-ng-controller="CardsController" data-ng-init="findOne()">
+    <h2>{{card.name}}</h2>
+    <ul>
+        <li>{{card.rarity}}</li>
+        <li>Attack: {{card.attack}}</li>
+    </ul>
+    <a class="btn btn-primary" href="/#!/cards/{{card._id}}/edit">
+    	Edit
+    </a> 
+    <a class="btn btn-danger" data-ng-click="remove();">
+        Delete
+    </a>
+</section>

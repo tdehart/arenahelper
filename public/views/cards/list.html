@@ -1,0 +1,13 @@
+<section data-ng-controller="CardsController" data-ng-init="find()">
+	<ul class="cards unstyled">
+		<li data-ng-repeat="card in cards">
+			<h2><a data-ng-href="#!/cards/{{card._id}}">{{card.name}}</a></h2>
+			<ul>
+                <li>{{card.rarity}}</li>
+                <li>{{card.attack}}</li>
+            </ul>
+
+		</li>
+	</ul>
+	<h1 data-ng-hide="!cards || cards.length">No cards yet. <br> Why don't you <a href="/#!/cards/create">Create One</a>?</h1>
+</section>

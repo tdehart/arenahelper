@@ -1,0 +1,27 @@
+<section data-ng-controller="CardsController">
+	<form class="form-horizontal" data-ng-submit="create()">
+		<div class="control-group">
+			<label class="control-label" for="name">Name</label>
+			<div class="controls">
+				<input type="text" data-ng-model="name" id="name" placeholder="Name" required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="rarity">Rarity</label>
+			<div class="controls">
+				<input type="text" data-ng-model="rarity" id="rarity" placeholder="Rarity" required>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="attack">Attack</label>
+			<div class="controls">
+				<input type="text" data-ng-model="attack" id="attack" placeholder="Attack" required>
+			</div>
+		</div>					
+		<div class="control-group">
+			<div class="controls">
+				<input type="submit" class="btn">
+			</div>
+		</div>
+	</form>
+</section>

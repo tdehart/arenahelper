@@ -74,6 +74,18 @@ module.exports = function(app, passport, auth) {
     // Finish with setting up the articleId param
     app.param('articleId', articles.article);
 
+    // Cards Routes
+    var cards = require('../app/controllers/cards');
+    app.get('/cards', cards.all);
+    app.post('/cards', auth.requiresLogin, cards.create);
+    app.get('/cards/:cardId', cards.show);
+    app.put('/cards/:cardId', auth.requiresLogin, cards.update);
+    app.del('/cards/:cardId', auth.requiresLogin, cards.destroy);
+
+    // Finish with setting up the cardId param
+    app.param('cardId', cards.card);
+
+
     // Home route
     var index = require('../app/controllers/index');
     app.get('/', index.render);

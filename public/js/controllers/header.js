@@ -9,6 +9,10 @@ angular.module('arenahelper.system').controller('HeaderController', ['$scope', '
     }, {
         'title': 'Create New Article',
         'link': 'articles/create'
+    },
+    {
+        'title': 'Create new card',
+        'link': 'cards/create'
     }];
     
     $scope.isCollapsed = false;
