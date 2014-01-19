@@ -1,11 +1,9 @@
 <section data-ng-controller="CardsController" data-ng-init="find()">
-	<ul class="cards unstyled">
-		<li data-ng-repeat="card in cards">
-			<h2><a data-ng-href="#!/cards/{{card._id}}">{{card.name}}</a></h2>
-			<ul>
-                <li>{{card.rarity}}</li>
-                <li>{{card.attack}}</li>
-            </ul>
+	<ul class="cards list-inline">
+		<li data-ng-repeat="card in cards | orderBy:'mana'">
+			<a data-ng-href="#!/cards/{{card._id}}">
+                <img src="/lib/hearthstone-cards/cards/{{card.image}}.png">
+            </a>
 
 		</li>
 	</ul>

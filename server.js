@@ -57,5 +57,23 @@ var port = process.env.PORT || config.port;
 app.listen(port);
 console.log('Express app started on port ' + port);
 
+//Seed hearthstone cards
+mongoose.connection.once('open', function() {
+  console.log("Database open");
+
+  if (config.seedData) {
+    require('./config/seed.js');
+
+    var Card = mongoose.model('Card');
+
+    Card.remove().exec()
+    .then(function() { Card.seed(require('./config/hearthstone.json')); });
+
+    console.log("Finished seeding");
+  }
+});
+
 // Expose app
 exports = module.exports = app;
+
+

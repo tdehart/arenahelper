@@ -3,16 +3,14 @@
 angular.module('arenahelper.system').controller('HeaderController', ['$scope', 'Global', function ($scope, Global) {
     $scope.global = Global;
 
-    $scope.menu = [{
-        'title': 'Articles',
-        'link': 'articles'
-    }, {
-        'title': 'Create New Article',
-        'link': 'articles/create'
+    $scope.menu = [
+    {
+        'title': 'Your Drafts',
+        'link': 'drafts'
     },
     {
-        'title': 'Create new card',
-        'link': 'cards/create'
+        'title': 'Cards',
+        'link': 'cards'
     }];
     
     $scope.isCollapsed = false;

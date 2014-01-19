@@ -1,0 +1,14 @@
+<section data-ng-controller="DraftsController" data-ng-init="findOne()">
+    <span>{{draft.created | date:'medium'}}</span>/
+    <span>{{draft.user.name}}</span>
+    <h2>{{draft.title}}</h2>
+    <div data-ng-show="global.user._id == draft.user._id">
+        <a class="btn" href="/#!/drafts/{{draft._id}}/edit">
+        	<i class="icon-edit"></i>
+        </a> 
+        <a class="btn" data-ng-click="remove();">
+            <i class="icon-trash"></i>
+        </a>
+    </div>
+    <div>{{draft.content}}</div>
+</section>
