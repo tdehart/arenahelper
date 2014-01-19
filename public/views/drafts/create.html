@@ -1,21 +1,42 @@
-<section data-ng-controller="DraftsController">
-	<form class="form-horizontal" data-ng-submit="create()">
-		<div class="control-group">
-			<label class="control-label" for="title">Title</label>
-			<div class="controls">
-				<input type="text" data-ng-model="title" id="title" placeholder="Title" required>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="content">Content</label>
-			<div class="controls">
-				<textarea data-ng-model="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-				<input type="submit" class="btn">
-			</div>
-		</div>
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+		<img ng-src="/lib/hearthstone-cards/cards/{{match.model.image}}.png" width="64">
+    <span class="card-label" bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+
+<h1 class="text-center">Turn 1</h1>
+
+<section data-ng-controller="DraftsController" data-ng-init="findCards()">
+	<form role="form">
+	  <div class="form-group">
+	    <label for="card1">First Choice</label>
+	    <input type="text" id="card1" class="form-control" placeholder="Enter first card name..." ng-model="card1" 
+	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+    			 	 typeahead-template-url="customTemplate.html">
+	  </div>
+	  <div class="form-group">
+	    <label for="card2">Second Choice</label>
+	    <input type="text" id="card2" class="form-control" placeholder="Enter second card name..." ng-model="card2" 
+	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+    			 	 typeahead-template-url="customTemplate.html">
+	  </div>
+	  <div class="form-group">
+	    <label for="card2">Third Choice</label>
+	    <input type="text" id="card3" class="form-control" placeholder="Enter third card name..." ng-model="card3" 
+	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+    			 	 typeahead-template-url="customTemplate.html">
+	  </div>	  
+  	<button type="submit" class="btn btn-primary">Next</button>
 	</form>
+
+	<div class="container">
+		<ul class="card-triple">
+			<li><img ng-show="card1.image" ng-src="/lib/hearthstone-cards/cards/{{card1.image}}.png" alt="First Card"></li>
+			<li><img ng-show="card2.image" ng-src="/lib/hearthstone-cards/cards/{{card2.image}}.png" alt="Second Card"></li>
+			<li><img ng-show="card3.image" ng-src="/lib/hearthstone-cards/cards/{{card3.image}}.png" alt="Third Card"></li>
+		</ul>
+	</div>
+		
+	
 </section>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '$routeParams', '$location', 'Global', 'Drafts', function ($scope, $routeParams, $location, Global, Drafts) {
+angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '$routeParams', '$location', 'Global', 'Cards', 'Drafts', function ($scope, $routeParams, $location, Global, Cards, Drafts) {
     $scope.global = Global;
 
     $scope.create = function() {
@@ -55,6 +55,12 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
             draftId: $routeParams.draftId
         }, function(draft) {
             $scope.draft = draft;
+        });
+    };
+
+    $scope.findCards = function() {
+        Cards.query(function(cards) {
+            $scope.cards = cards;
         });
     };
 }]);

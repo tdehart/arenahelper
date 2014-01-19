@@ -1,0 +1,13 @@
+.card-label {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.card-triple {
+  list-style: none;
+  text-align: center;
+}
+
+ul.card-triple > li {
+  display: inline-block;
+}
