@@ -11,3 +11,66 @@
 ul.card-triple > li {
   display: inline-block;
 }
+
+.card-selection {
+  cursor: pointer;
+}
+
+.card-selection:hover {
+  background: #DADADA;
+}
+
+.active {
+  background-color: #DADADA;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+.modal-backdrop.animation-fade {
+  opacity: .5;
+  transition: opacity .15s linear;
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      opacity: .5;
+    }
+  }
+}
+
+.ng-leave {
+  opacity: .5;
+  &.ng-leave-active {
+    opacity: 0;
+  }
+}
+
+.modal-open .modal,.btn:focus{
+    outline:none!important
+}
+
+.hero-list {
+  -moz-column-gap: 20;
+  -moz-column-count: 3;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 20;
+  column-count: 3;
+  column-gap: 20;
+}
+
+.hero-list li {
+  cursor: pointer;
+  font-size: 48px;
+  color: #428bca;
+
+}
+
+.hero-list li:hover {
+  color: #262626;
+  background: #F4F4F4;
+}
+
+.share-div {
+  padding-bottom: 10px;
+}

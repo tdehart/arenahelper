@@ -74,6 +74,17 @@ module.exports = function(app, passport, auth) {
     // Finish with setting up the articleId param
     app.param('articleId', articles.article);
 
+    // Drafts Routes
+    var drafts = require('../app/controllers/drafts');
+    app.get('/drafts', drafts.all);
+    app.post('/drafts', auth.requiresLogin, drafts.create);
+    app.get('/drafts/:draftId', drafts.show);
+    app.put('/drafts/:draftId', auth.requiresLogin, auth.article.hasAuthorization, drafts.update);
+    app.del('/drafts/:draftId', auth.requiresLogin, auth.article.hasAuthorization, drafts.destroy);
+
+    // Finish with setting up the draftId param
+    app.param('draftId', drafts.draft);
+
     // Cards Routes
     var cards = require('../app/controllers/cards');
     app.get('/cards', cards.all);

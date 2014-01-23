@@ -5,38 +5,117 @@
   </a>
 </script>
 
-<h1 class="text-center">Turn 1</h1>
+<script type="text/ng-template" id="modal.tpl.html">
+  <div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="$hide()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Share your draft in BBCode</h4>
+      </div>
+      <div class="modal-body">
+        <div class="well">
+          [quote="ArenaHelper"]
+          <div ng-repeat="turn in turns">
+            {{$index+1}}. 
+            <span ng-if="turn.card1.name == turn.selectedCard.name">[b]</span>{{turn.card1.name}}<span ng-if="turn.card1.name == turn.selectedCard.name">[/b]</span> / 
+            <span ng-if="turn.card2.name == turn.selectedCard.name">[b]</span>{{turn.card2.name}}<span ng-if="turn.card2.name == turn.selectedCard.name">[/b]</span> / 
+            <span ng-if="turn.card3.name == turn.selectedCard.name">[b]</span>{{turn.card3.name}}<span ng-if="turn.card3.name == turn.selectedCard.name">[/b]</span>
+          </div>
+          [/quote]
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
 
 <section data-ng-controller="DraftsController" data-ng-init="findCards()">
-	<form role="form">
-	  <div class="form-group">
-	    <label for="card1">First Choice</label>
-	    <input type="text" id="card1" class="form-control" placeholder="Enter first card name..." ng-model="card1" 
-	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
-    			 	 typeahead-template-url="customTemplate.html">
-	  </div>
-	  <div class="form-group">
-	    <label for="card2">Second Choice</label>
-	    <input type="text" id="card2" class="form-control" placeholder="Enter second card name..." ng-model="card2" 
-	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
-    			 	 typeahead-template-url="customTemplate.html">
-	  </div>
-	  <div class="form-group">
-	    <label for="card2">Third Choice</label>
-	    <input type="text" id="card3" class="form-control" placeholder="Enter third card name..." ng-model="card3" 
-	    			 typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
-    			 	 typeahead-template-url="customTemplate.html">
-	  </div>	  
-  	<button type="submit" class="btn btn-primary">Next</button>
-	</form>
+  <div ng-hide="chosenHeroClass">
+    <div class="text-center">
+      <ul class="hero-list">
+        <li ng-repeat="heroClass in heroClasses">
+          <span ng-click="chooseHeroClass(heroClass)">{{heroClass}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-	<div class="container">
-		<ul class="card-triple">
-			<li><img ng-show="card1.image" ng-src="/lib/hearthstone-cards/cards/{{card1.image}}.png" alt="First Card"></li>
-			<li><img ng-show="card2.image" ng-src="/lib/hearthstone-cards/cards/{{card2.image}}.png" alt="Second Card"></li>
-			<li><img ng-show="card3.image" ng-src="/lib/hearthstone-cards/cards/{{card3.image}}.png" alt="Third Card"></li>
-		</ul>
-	</div>
-		
-	
+  <div ng-show="chosenHeroClass">
+    <h1>{{chosenHeroClass}}</h1>
+    <div class="text-center">
+      <h1>Turn {{currentTurn}}</h1>
+      <button type="button" class="btn btn-primary" ng-hide="isFirstTurn()" ng-click="prevStep()">Previous</button>
+      <button type="button" class="btn btn-primary" ng-hide="isLastTurn()" ng-click="nextStep()">Next</button>
+      <button type="button" class="btn btn-success" data-ng-show="global.user && isLastTurn()" ng-click="create()">Save</button>
+      <button type="button" class="btn btn-default" ng-show="isLastTurn()" data-animation="animation-fadeAndScale" data-template="modal.tpl.html" bs-modal="modal">
+        <span class="glyphicon glyphicon-share"></span> Share
+      </button>
+    </div>
+
+    <form role="form">
+      <div class="form-group">
+        <label for="card1">First Choice</label>
+        <input type="text" id="card1" class="form-control" placeholder="Enter first card name..." ng-model="card1" 
+               typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+               typeahead-template-url="customTemplate.html">
+      </div>
+      <div class="form-group">
+        <label for="card2">Second Choice</label>
+        <input type="text" id="card2" class="form-control" placeholder="Enter second card name..." ng-model="card2" 
+               typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+               typeahead-template-url="customTemplate.html">
+      </div>
+      <div class="form-group">
+        <label for="card2">Third Choice</label>
+        <input type="text" id="card3" class="form-control" placeholder="Enter third card name..." ng-model="card3" 
+               typeahead="card as card.name for card in cards | filter:{name: $viewValue} | limitTo:8" 
+               typeahead-template-url="customTemplate.html">
+      </div>
+    </form>
+
+    <h1 class="text-center">Enter card names then choose a card below</h1>
+
+    <div class="container">
+      <ul class="card-triple">
+        <li class="card-selection" ng-click="selectCard(card1)" ng-class="{active: selectedCard == card1}">
+          <img ng-show="card1.image" ng-src="/lib/hearthstone-cards/cards/{{card1.image}}.png" alt="First Card">
+        </li>
+        <img ng-hide="card1.image" src="/img/cardtempl.png" width="200px">
+        <li class="card-selection" ng-click="selectCard(card2)" ng-class="{active: selectedCard == card2}">
+          <img ng-show="card2.image" ng-src="/lib/hearthstone-cards/cards/{{card2.image}}.png" alt="Second Card">
+        </li>
+        <img ng-hide="card2.image" src="/img/cardtempl.png" width="200px">
+        <li class="card-selection" ng-click="selectCard(card3)" ng-class="{active: selectedCard == card3}">
+          <img ng-show="card3.image" ng-src="/lib/hearthstone-cards/cards/{{card3.image}}.png" alt="Third Card">
+        </li>
+        <img ng-hide="card3.image" src="/img/cardtempl.png" width="200px">
+      </ul>
+
+      <div class="text-center" ng-show="selectedCard">
+        <h1>{{selectedCard.name}}</h1>
+        <ul class="list-unstyled" ng-show="selectedCard.type == 'Minion'">
+          <li>Mana Cost: {{selectedCard.mana}}</li>
+          <li>Attack: {{selectedCard.attack}}</li>
+          <li>Health: {{selectedCard.health}}</li>
+          <li>{{selectedCard.description}}</li>
+        </ul>
+        <ul class="list-unstyled" ng-show="selectedCard.type == 'Spell'">
+          <li>Mana Cost: {{selectedCard.mana}}</li>
+          <li>{{selectedCard.description}}</li>
+        </ul>
+        <ul class="list-unstyled" ng-show="selectedCard.type == 'Weapon'">
+          <li>Mana Cost: {{selectedCard.mana}}</li>
+          <li>{{selectedCard.description}}</li>
+        </ul>
+
+        <button type="button" class="btn btn-primary" ng-hide="isLastTurn()" ng-click="nextStep()">Next</button>
+        <button type="button" class="btn btn-success" data-ng-show="global.user" ng-show="isLastTurn()" ng-click="create()">Finish</button>
+      </div>
+    </div>
+  </div>
+
+  
 </section>

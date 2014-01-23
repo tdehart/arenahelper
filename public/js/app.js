@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('arenahelper', ['ngCookies', 'ngResource', 'ngRoute',
-                               'ui.bootstrap', 'ui.route', 'arenahelper.system',
-                               'arenahelper.articles', 'arenahelper.cards', 'arenahelper.drafts']);
+                               'ui.bootstrap', 'ui.route', 'ngAnimate', 'mgcrea.ngStrap',
+                               'arenahelper.system', 'arenahelper.articles', 
+                               'arenahelper.cards', 'arenahelper.drafts',
+                               'arenahelper.filters']);
 
 angular.module('arenahelper.system', []);
 angular.module('arenahelper.articles', []);

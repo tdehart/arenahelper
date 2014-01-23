@@ -1,14 +1,9 @@
-<!-- <section data-ng-controller="DraftsController" data-ng-init="find()">
-	<ul class="drafts unstyled">
-		<li data-ng-repeat="draft in drafts">
-			<span>{{draft.created | date:'medium'}}</span> /
-			<span>{{draft.user.name}}</span>
-			<h2><a data-ng-href="#!/drafts/{{draft._id}}">{{draft.title}}</a></h2>
-			<div>{{draft.content}}</div>
-		</li>
-	</ul>
-	<h1 data-ng-hide="!drafts || drafts.length">No drafts yet. <br> Why don't you <a href="/#!/drafts/create">Create One</a>?</h1>
-</section> -->
-
-<h1>No drafts yet. <br> Why don't you <a href="/#!/drafts/create">Create One</a>?</h1>
-
+<section data-ng-controller="DraftsController" data-ng-init="find()">
+  <ul class="drafts list-unstyled">
+    <li data-ng-repeat="draft in drafts">
+      <h2><a data-ng-href="#!/drafts/{{draft._id}}">{{draft.created | date:'medium'}}</a></h2>
+      <div>{{draft.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!drafts || drafts.length">No drafts yet. <br> Why don't you <a href="/#!/drafts/create">Create One</a>?</h1>
+</section>

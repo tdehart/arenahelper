@@ -55,3 +55,4 @@ angular.module('arenahelper').config(['$locationProvider',
         $locationProvider.hashPrefix('!');
     }
 ]);
+
