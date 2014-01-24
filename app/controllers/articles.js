@@ -81,7 +81,6 @@ exports.destroy = function(req, res) {
  * Show an article
  */
 exports.show = function(req, res) {
-    console.log('show');
     res.jsonp(req.article);
 };
 

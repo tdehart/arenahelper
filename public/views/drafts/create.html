@@ -11,11 +11,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="$hide()" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Share your draft in BBCode</h4>
+        <h4 class="modal-title">Share your draft (BBCode)</h4>
       </div>
       <div class="modal-body">
         <div class="well">
-          [quote="ArenaHelper"]
+          [quote="ArenaHelper"]<br />
+          [b]{{chosenHeroClass}}[/b]<br/><br/>
           <div ng-repeat="turn in turns">
             {{$index+1}}. 
             <span ng-if="turn.card1.name == turn.selectedCard.name">[b]</span>{{turn.card1.name}}<span ng-if="turn.card1.name == turn.selectedCard.name">[/b]</span> / 

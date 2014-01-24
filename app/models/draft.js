@@ -15,6 +15,10 @@ var DraftSchema = new Schema({
       type: Object,
       default: {}
     },
+    heroClass: {
+      type: String,
+      default: ""
+    },
     user: {
       type: Schema.ObjectId,
       ref: 'User'

@@ -5,11 +5,13 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
     $scope.global = Global;
     $scope.currentTurn = 1;
     $scope.turns = {};
+    $scope.chosenHeroClass = null;
     $scope.heroClasses = ["Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"]
     resetCards();
 
     $scope.create = function() {
       var draft = new Drafts({
+        heroClass: this.chosenHeroClass,
         turns: this.turns
       });
       draft.$save(function(response) {
