@@ -1,7 +1,7 @@
 <section data-ng-controller="DraftsController" data-ng-init="find()">
   <ul class="drafts list-unstyled">
     <li data-ng-repeat="draft in drafts">
-      <h2><a data-ng-href="#!/drafts/{{draft._id}}">{{draft.created | date:'medium'}}</a></h2>
+      <h2><a data-ng-href="#!/drafts/{{draft._id}}">{{draft.heroClass}} - {{draft.created | date:'short'}}</a></h2>
       <div>{{draft.content}}</div>
     </li>
   </ul>

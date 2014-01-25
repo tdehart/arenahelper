@@ -1,35 +1,7 @@
-<script type="text/ng-template" id="modal.tpl.html">
-
-  <div class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" ng-click="$hide()" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Share your draft (BBCode)</h4>
-      </div>
-      <div class="modal-body">
-        <div class="well">
-          [quote="ArenaHelper"]<br />
-          [b]{{draft.heroClass}}[/b]<br/><br/>
-          <div ng-repeat="turn in turnsList">
-            {{$index+1}}. 
-            <span ng-if="turn.card1.name == turn.selectedCard.name">[b]</span>{{turn.card1.name}}<span ng-if="turn.card1.name == turn.selectedCard.name">[/b]</span> / 
-            <span ng-if="turn.card2.name == turn.selectedCard.name">[b]</span>{{turn.card2.name}}<span ng-if="turn.card2.name == turn.selectedCard.name">[/b]</span> / 
-            <span ng-if="turn.card3.name == turn.selectedCard.name">[b]</span>{{turn.card3.name}}<span ng-if="turn.card3.name == turn.selectedCard.name">[/b]</span>
-          </div>
-          [/quote]
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</script>
-
 <section data-ng-controller="DraftsController" data-ng-init="findOne()">
   <div class='share-div'>
-    <button type="button" class="btn btn-default" data-animation="animation-fadeAndScale" data-template="modal.tpl.html" bs-modal="modal">
+    <button type="button" class="btn btn-default" data-animation="animation-fadeAndScale" 
+            data-template="/views/drafts/partials/shareModal.html" bs-modal="modal">
     <span class="glyphicon glyphicon-share"></span> Share
   </button>
   </div>

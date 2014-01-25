@@ -10,6 +10,8 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
     resetCards();
 
     $scope.create = function() {
+      updateTurnsDict();
+
       var draft = new Drafts({
         heroClass: this.chosenHeroClass,
         turns: this.turns
@@ -57,12 +59,10 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
         draftId: $routeParams.draftId
       }, function(draft) {
         $scope.draft = draft;
-        var turnsList = [];
 
-        for (var i = 1; i <= 30; i++) {
-          turnsList.push($scope.draft.turns[i]);
-        }
-        $scope.turnsList = turnsList;
+        $scope.chosenHeroClass = draft.heroClass;
+
+        $scope.turnsList = convertTurnsToList(draft.turns);;
       });
     };
 
@@ -107,6 +107,12 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
       $scope.chosenHeroClass = heroClass;
     }
 
+    $scope.shareDraft = function() {
+      updateTurnsDict();
+
+      $scope.turnsList = convertTurnsToList($scope.turns);
+    }
+
     function updateTurnsDict() {
       $scope.turns[$scope.currentTurn] = {
         card1: $scope.card1,
@@ -134,5 +140,15 @@ angular.module('arenahelper.drafts').controller('DraftsController', ['$scope', '
       $scope.card3 = "";
       $scope.selectedCard = null;
     };
+
+    function convertTurnsToList(turnsDict) {
+      var turnsList = [];
+
+      for (var i = 1; i <= 30; i++) {
+        turnsList.push(turnsDict[i]);
+      }
+
+      return turnsList;
+    }
   }
 ]);
