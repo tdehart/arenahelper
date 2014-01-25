@@ -86,10 +86,10 @@ exports.show = function(req, res) {
 };
 
 /**
- * List of Drafts
+ * List of User's Drafts
  */
 exports.all = function(req, res) {
-    Draft.find().sort('-created').populate('user', 'name username').exec(function(err, drafts) {
+    Draft.find({user: req.user}).sort('-created').populate('user', 'name username').exec(function(err, drafts) {
         if (err) {
             res.render('error', {
                 status: 500
